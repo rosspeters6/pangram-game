@@ -28,7 +28,7 @@ parser.add_argument('-l',
                     '--length-min',
                     help='Minimum length of pangram word',
                     type=int,
-                    default=12)
+                    default=7)
 parser.add_argument('-d',
                     '--debug',
                     help='Set to print debug messages',
