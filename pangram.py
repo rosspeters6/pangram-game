@@ -1,12 +1,3 @@
-#
-# This script picks a pangram randomly from a list of words.
-# When it runs, it prints the letters and the line number
-# of the word in the input file.
-#
-# This script doesn't keep its own list of words data structure.
-# Instead, it keeps picking words at random from the file until
-# it finds a word with the desired number of letters.
-#
 import argparse
 import linecache
 import os
@@ -18,11 +9,16 @@ parser = argparse.ArgumentParser(
                     prog='Pangram Game',
                     description='Finds random pangram and scrambles word.',
                     epilog='File must contain at least one pangram word.')
-parser.add_argument('-f',
-                    '--file',
+parser.add_argument('-w',
+                    '--words',
                     help='Path to list of words',
                     type=str,
                     default='/usr/share/dict/words')
+parser.add_argument('-a',
+                    '--answer',
+                    help='Name of the answer file to create',
+                    type=str,
+                    default='./.answer')
 parser.add_argument('-u',
                     '--unique-letters',
                     help='Number of unique letters in pangram word',
@@ -39,10 +35,11 @@ parser.add_argument('-d',
                     action='store_true',
                     default=False)
 args = parser.parse_args()
-LIST_OF_WORDS_FILENAME = args.file
+LIST_OF_WORDS_FILENAME = args.words
 PANGRAM_UNIQUE_LETTER_COUNT = args.unique_letters
 PANGRAM_MIN_WORD_LENGTH = args.length_min
 DEBUG_PRINTS_ENABLED = args.debug
+ANSWER_FILENAME=args.answer
 
 # This script assumes the file contais at least one word that has
 # the special number of unique letters.
@@ -84,3 +81,7 @@ shuffled_unique_letters_as_list = list(unique_letters_in_word)
 random.shuffle(shuffled_unique_letters_as_list)
 shuffled_unique_letters = ''.join(shuffled_unique_letters_as_list)
 print(shuffled_unique_letters.upper())
+
+# Write the solution to a file so the user can peek at it.
+with open(ANSWER_FILENAME, 'w') as answer_file:
+    answer_file.write(word + '\n')

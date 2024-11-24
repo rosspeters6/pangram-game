@@ -1,6 +1,6 @@
 # pangram-game
-This program is a game that picks a pangram out of a dictionary
-and scrambles the word.
+This program is a game that picks a pangram out of a dictionary and scrambles
+the word. It writes the word to an output file, called ".answer" by default.
 
 A "pangram" is a word that uses seven unique letters.
 A "perfect pangram" is just a seven-letter word.
